@@ -1,5 +1,5 @@
 // variable that stores the API key
-const APIKey = "71382d9165047b8c2f705fcf08ff20ed";
+const APIKey = "e44640c3292c7704425b7a92efe4de75";
 
 //variable that collect user's input and stores it
 const city = "London";
@@ -11,5 +11,30 @@ const queryURL =
   "&appid=" +
   APIKey;
 
-//make the API call using fetch
-fetch(queryURL);
+//render today's city weather
+const renderCityWeather = () => {
+  console.log("Hooray");
+};
+
+const onLoad = () => {
+  //handle API response
+  const handleResponse = (response) => {
+    if (response.status !== 200) {
+      throw new Error("Something went wrong");
+    }
+    return response.json();
+  };
+
+  //handle error function
+  const handleError = (error) => {
+    console.log(error);
+  };
+
+  //get data from the API
+  fetch(queryURL)
+    .then(handleResponse)
+    .then(renderCityWeather)
+    .catch(handleError);
+};
+
+$(window).on("load", onLoad);
