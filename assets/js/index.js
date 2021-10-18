@@ -1,6 +1,9 @@
 //target submit button on search container
 const submitBtn = $("#search-button");
 
+//target city list container
+const cityContainer = $("#city-list");
+
 // function to add city to local storage
 const updateLocalStorage = (city) => {
   //get city from local storage
@@ -16,7 +19,16 @@ const updateLocalStorage = (city) => {
 };
 
 //function to render search history
-const renderSearchHistory = () => {};
+const renderSearchHistory = (citiesSearched) => {
+  //build city item
+  const constructCityListItem = (city) => {
+    const cityListItem = `<li class="list-group-item">${city}</li>`;
+
+    cityContainer.append(cityListItem);
+  };
+  //append city item to list container
+  citiesSearched.forEach(constructCityListItem);
+};
 
 //get text from input
 const getCityName = (event) => {
@@ -29,6 +41,9 @@ const getCityName = (event) => {
   if (city) {
     //update local storage with ciy value
     updateLocalStorage(city);
+
+    //render city list
+    renderSearchHistory(updateLocalStorage(city));
 
     //re-render search history
   } else {
