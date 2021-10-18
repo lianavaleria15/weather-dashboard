@@ -20,42 +20,61 @@
     <!--heading here ; how do I add text to center?? -->
     <nav class="navbar navbar-light bg-primary text-center">
       <div class="container-fluid">
-        <span class="navbar-brand h1 text-white">Weather Dashboard</span>
+        <span class="navbar-brand h1 text-white text-center"
+          >Weather Dashboard</span
+        >
       </div>
     </nav>
+
     <main class="bg-light bg-gradient">
       <!--main container here-->
-      <div class="container-fluid d-flex flex-wrap flex-lg-row">
+      <div class="d-flex flex-wrap justify-content-around">
         <!--aside container here-->
-        <div class="col-3 m-3 aside-container">
+        <div class="col-3 m-2 aside-container">
           <!--search city container here-->
           <h2>Search for a city:</h2>
-          <form class="form">
-            <input
-              class="form-control w-100 p-2 my-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button type="submit" class="btn btn-primary btn-block">
-              Search
-            </button>
-          </form>
+          <!-- <form class="form"> -->
+          <input
+            id="city-input"
+            class="form-control col-12 p-2 my-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button
+            type="submit"
+            id="search-button"
+            class="btn btn-primary btn-block m-2"
+          >
+            Search
+          </button>
+          <!-- </form> -->
 
           <!--city searched lists here-->
-          <ul class="list-group m-2">
+          <!-- <ul class="col-12 list-group m-2">
             <li class="list-group-item">Tokio</li>
             <li class="list-group-item">Athens</li>
             <li class="list-group-item">Birmingham</li>
             <li class="list-group-item">Madrid</li>
             <li class="list-group-item">New York</li>
-          </ul>
+          </ul> -->
         </div>
 
         <!--main weather container-->
-        <div class="col-7 my-5 today-container">
+
+        <div
+          class="
+            col-7
+            m-5
+            d-flex
+            flex-wrap
+            justify
+            content-center
+            today-container
+          "
+        >
           <!--today weather card-->
-          <div class="card w-75">
+          <!-- <div class="card col-9 mx-3">
             <div class="card-body">
               <h2 class="card-title">Card title</h2>
               <p class="card-text">Temp:</p>
@@ -65,13 +84,12 @@
                 UV index: <button class="btn btn-primary">0.47</button>
               </p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
+      <!-- <h3 class="p-3 text-center">5-Day Forecast:</h3> -->
 
-      <h3 class="p-3">5-Day Forecast:</h3>
-
-      <!--container for 5 days weather cards-->
+      <!-- container for 5 days weather cards
       <div class="container-fluid m-3 d-flex flex-wrap justify-content-center">
         <div class="card m-1" style="width: 18rem">
           <div class="card-body">
@@ -122,7 +140,7 @@
             <p class="card-text">Humidity:</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </main>
     <!--bootstrap js-->
     <script
