@@ -4,6 +4,9 @@ const submitBtn = $("#search-button");
 //target city list container
 const cityContainer = $("#city-list");
 
+// variable that stores the API key
+const APIKey = "e44640c3292c7704425b7a92efe4de75";
+
 // function to add city to local storage
 const updateLocalStorage = (city) => {
   //get city from local storage
@@ -39,11 +42,24 @@ const getCityName = (event) => {
 
   //validate if input is empty
   if (city) {
+    //construct a query URL to make the API call
+    const queryURL =
+      "http://api.openweathermap.org/data/2.5/weather?q=" +
+      city +
+      "&appid=" +
+      APIKey;
+
+    //get data from the API
+    fetch(queryURL)
+      .then(handleResponse)
+      .then(renderCurrentWeather)
+      .catch(handleError);
+
     //update local storage with ciy value
     updateLocalStorage(city);
 
-    //render city list
-    renderSearchHistory(updateLocalStorage(city));
+    //render search history
+    renderSearchHistory();
 
     //re-render search history
   } else {
@@ -53,19 +69,6 @@ const getCityName = (event) => {
 
 //add event on submit button
 submitBtn.on("click", getCityName);
-
-// variable that stores the API key
-// const APIKey = "e44640c3292c7704425b7a92efe4de75";
-
-//variable that collect user's input and stores it
-// const city = "London";
-
-//construct a query URL to make the API call
-// const queryURL =
-//   "http://api.openweathermap.org/data/2.5/weather?q=" +
-//   city +
-//   "&appid=" +
-//   APIKey;
 
 // //render today's city weather
 // const renderCityWeather = () => {
@@ -86,11 +89,5 @@ submitBtn.on("click", getCityName);
 //     console.log(error);
 //   };
 
-//   //get data from the API
-//   fetch(queryURL)
-//     .then(handleResponse)
-//     .then(renderCityWeather)
-//     .catch(handleError);
-// };
 const onLoad = () => {};
 $(window).on("load", onLoad);
