@@ -66,6 +66,10 @@ const getWeatherData = async (cityName) => {
   const lat = data.coord.lat;
   const lon = data.coord.lon;
   const name = data.name;
+
+  //build API URL to get weather for current card and forecast weather
+  const weather_URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${keyAPI}&units=metric`;
+  console.log(weather_URL);
 };
 
 //construct current weather card
