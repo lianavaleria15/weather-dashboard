@@ -54,13 +54,18 @@ const weatherCardsContainer = $("#weather-cards-container");
 const keyAPI = "e44640c3292c7704425b7a92efe4de75";
 
 const getWeatherData = async (cityName) => {
-  //build API URL
+  //build API URL to get latitude and longitude data
   const url_API = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${keyAPI}`;
 
   //import API data into JS
   const response = await fetch(url_API);
   const data = await response.json();
   console.log(data);
+
+  //get latitude and longitude data and city name
+  const lat = data.coord.lat;
+  const lon = data.coord.lon;
+  const name = data.name;
 };
 
 //construct current weather card
