@@ -1,5 +1,5 @@
 // use mock data here to construct and render weather containers before getting api data
-const weatherData = {
+const mockWeatherData = {
   current: {
     name: "London",
     temperature: 123.45,
@@ -52,7 +52,7 @@ const weatherData = {
 const weatherCardsContainer = $("#weather-cards-container");
 
 //construct current weather card
-const constructCurrentWeatherCard = (data) => {
+const renderCurrentWeatherCard = (data) => {
   //use template string to construct current weather card
   const currentWeatherCard = `<div class="card-body bg-white border mb-2">
     <h2 class="card-title">
@@ -70,7 +70,7 @@ const constructCurrentWeatherCard = (data) => {
 };
 
 //construct forecast weather cards
-const constructForecastWeatherCards = (forecastData) => {
+const renderForecastWeatherCards = (forecastData) => {
   //callback function to construct each card
   const constructAndAppendForecastWeatherCard = (each) => {
     return `<div class="card m-1" style="width: 18rem">
@@ -108,5 +108,10 @@ const constructForecastWeatherCards = (forecastData) => {
 };
 
 //render weather containers
-constructCurrentWeatherCard(weatherData.current);
-constructForecastWeatherCards(weatherData.forecast);
+const renderWeatherContainers = (weatherData) => {
+  //render current and forecast data functions
+  renderCurrentWeatherCard(weatherData.current);
+  renderForecastWeatherCards(weatherData.forecast);
+};
+
+renderWeatherContainers(mockWeatherData);
