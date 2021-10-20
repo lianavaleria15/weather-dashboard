@@ -17,177 +17,135 @@
   </head>
 
   <body>
-    <!--heading-->
-    <header class="bg-primary p-3 text-center text-light">
-      <h1>Weather Dashboard</h1>
-    </header>
+    <div class="min-vh-100 bg-light">
+      <!--heading-->
+      <header class="bg-primary p-3 text-center text-light">
+        <h1>Weather Dashboard</h1>
+      </header>
 
-    <main>
-      <div class="row gx-0 p-3">
-        <!--search container here-->
-        <div class="col-12 col-md-3 bg-white border p-2 mb-3">
-          <!--search city container here-->
-          <h2>Search for a city:</h2>
-          <form class="form" id="search-form">
-            <input
-              id="city-input"
-              class="form-control col-12 p-2 my-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              type="submit"
-              id="search-button"
-              class="btn btn-primary btn-block m-2"
-            >
-              Search
-            </button>
-          </form>
+      <main>
+        <div class="row gx-0 p-3">
+          <!--search container here-->
+          <div class="col-12 col-md-3 bg-white border p-2 mb-3">
+            <!--search city container here-->
+            <h2>Search for a city:</h2>
+            <form class="form" id="search-form">
+              <input
+                id="city-input"
+                class="form-control col-12 p-2 my-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                type="submit"
+                id="search-button"
+                class="btn btn-primary btn-block m-2"
+              >
+                Search
+              </button>
+            </form>
 
-          <hr />
+            <hr />
 
-          <!--city searched lists here-->
-          <ul class="col-12 list-group" id="city-list">
-            <li class="list-group-item">Tokio</li>
-            <li class="list-group-item">Athens</li>
-            <li class="list-group-item">Birmingham</li>
-            <li class="list-group-item">Madrid</li>
-            <li class="list-group-item">New York</li>
-          </ul>
-        </div>
+            <!--city searched lists here-->
+            <ul class="col-12 list-group" id="city-list">
+              <li class="list-group-item">Tokio</li>
+              <li class="list-group-item">Athens</li>
+              <li class="list-group-item">Birmingham</li>
+              <li class="list-group-item">Madrid</li>
+              <li class="list-group-item">New York</li>
+            </ul>
+          </div>
 
-        <!--Weather cards container-->
-        <div class="col-12 col-md-9 bg-white border p-2 mb-3">
-          <div class="d-flex flex-column">
-            <!--current weather card-->
-            <div class="card-body bg-white border mb-2">
-              <h2 class="card-title">
-                London (20/10/2021)
-                <img src="http://openweathermap.org/img/w/04n.png" />
-              </h2>
-              <p class="card-text">Temp: 45.67 &deg;F</p>
-              <p class="card-text">Wind: 15.43 MPH</p>
-              <p class="card-text">Humidity: 78%</p>
-              <p class="card-text">
-                UV index: <span class="btn btn-primary">0.47</span>
-              </p>
-            </div>
+          <!--Weather cards container-->
+          <div class="col-12 col-md-9 bg-white border p-2 mb-3">
+            <div class="d-flex flex-column">
+              <!--current weather card-->
+              <div class="card-body bg-white border mb-2">
+                <h2 class="card-title">
+                  London (20/10/2021)
+                  <img src="http://openweathermap.org/img/w/04n.png" />
+                </h2>
+                <p class="card-text">Temp: 45.67 &deg;F</p>
+                <p class="card-text">Wind: 15.43 MPH</p>
+                <p class="card-text">Humidity: 78%</p>
+                <p class="card-text">
+                  UV index: <span class="btn btn-primary">0.47</span>
+                </p>
+              </div>
 
-            <!--forecast weather cards-->
-            <div class="bg-white border">
-              <h3 class="p-3 text-center">5-Day Forecast:</h3>
-              <!--container forecast weather cards-->
-              <div class="d-flex flex-wrap justify-content-around">
-                <div class="card m-1" style="width: 18rem">
-                  <div class="card-body">
-                    <h5 class="card-title">20/10/2021</h5>
-                    <p class="card-text">
-                      <img src="http://openweathermap.org/img/w/04n.png" />
-                    </p>
-                    <p class="card-text">Temp: 45.67 &deg;F</p>
-                    <p class="card-text">Wind: 15.43 MPH</p>
-                    <p class="card-text">Humidity: 78%</p>
+              <!--forecast weather cards-->
+              <div class="bg-white border">
+                <h3 class="p-3 text-center">5-Day Forecast:</h3>
+                <!--container forecast weather cards-->
+                <div class="d-flex flex-wrap justify-content-around">
+                  <div class="card m-1" style="width: 18rem">
+                    <div class="card-body">
+                      <h5 class="card-title">20/10/2021</h5>
+                      <p class="card-text">
+                        <img src="http://openweathermap.org/img/w/04n.png" />
+                      </p>
+                      <p class="card-text">Temp: 45.67 &deg;F</p>
+                      <p class="card-text">Wind: 15.43 MPH</p>
+                      <p class="card-text">Humidity: 78%</p>
+                    </div>
                   </div>
-                </div>
 
-                <div class="card m-1" style="width: 18rem">
-                  <div class="card-body">
-                    <h5 class="card-title">20/10/2021</h5>
-                    <p class="card-text">
-                      <img src="http://openweathermap.org/img/w/04n.png" />
-                    </p>
-                    <p class="card-text">Temp: 45.67 &deg;F</p>
-                    <p class="card-text">Wind: 15.43 MPH</p>
-                    <p class="card-text">Humidity: 78%</p>
+                  <div class="card m-1" style="width: 18rem">
+                    <div class="card-body">
+                      <h5 class="card-title">20/10/2021</h5>
+                      <p class="card-text">
+                        <img src="http://openweathermap.org/img/w/04n.png" />
+                      </p>
+                      <p class="card-text">Temp: 45.67 &deg;F</p>
+                      <p class="card-text">Wind: 15.43 MPH</p>
+                      <p class="card-text">Humidity: 78%</p>
+                    </div>
                   </div>
-                </div>
 
-                <div class="card m-1" style="width: 18rem">
-                  <div class="card-body">
-                    <h5 class="card-title">20/10/2021</h5>
-                    <p class="card-text">
-                      <img src="http://openweathermap.org/img/w/04n.png" />
-                    </p>
-                    <p class="card-text">Temp: 45.67 &deg;F</p>
-                    <p class="card-text">Wind: 15.43 MPH</p>
-                    <p class="card-text">Humidity: 78%</p>
+                  <div class="card m-1" style="width: 18rem">
+                    <div class="card-body">
+                      <h5 class="card-title">20/10/2021</h5>
+                      <p class="card-text">
+                        <img src="http://openweathermap.org/img/w/04n.png" />
+                      </p>
+                      <p class="card-text">Temp: 45.67 &deg;F</p>
+                      <p class="card-text">Wind: 15.43 MPH</p>
+                      <p class="card-text">Humidity: 78%</p>
+                    </div>
                   </div>
-                </div>
 
-                <div class="card m-1" style="width: 18rem">
-                  <div class="card-body">
-                    <h5 class="card-title">20/10/2021</h5>
-                    <p class="card-text">
-                      <img src="http://openweathermap.org/img/w/04n.png" />
-                    </p>
-                    <p class="card-text">Temp: 45.67 &deg;F</p>
-                    <p class="card-text">Wind: 15.43 MPH</p>
-                    <p class="card-text">Humidity: 78%</p>
+                  <div class="card m-1" style="width: 18rem">
+                    <div class="card-body">
+                      <h5 class="card-title">20/10/2021</h5>
+                      <p class="card-text">
+                        <img src="http://openweathermap.org/img/w/04n.png" />
+                      </p>
+                      <p class="card-text">Temp: 45.67 &deg;F</p>
+                      <p class="card-text">Wind: 15.43 MPH</p>
+                      <p class="card-text">Humidity: 78%</p>
+                    </div>
                   </div>
-                </div>
 
-                <div class="card m-1" style="width: 18rem">
-                  <div class="card-body">
-                    <h5 class="card-title">20/10/2021</h5>
-                    <p class="card-text">
-                      <img src="http://openweathermap.org/img/w/04n.png" />
-                    </p>
-                    <p class="card-text">Temp: 45.67 &deg;F</p>
-                    <p class="card-text">Wind: 15.43 MPH</p>
-                    <p class="card-text">Humidity: 78%</p>
+                  <div class="card m-1" style="width: 18rem">
+                    <div class="card-body">
+                      <h5 class="card-title">20/10/2021</h5>
+                      <p class="card-text">
+                        <img src="http://openweathermap.org/img/w/04n.png" />
+                      </p>
+                      <p class="card-text">Temp: 45.67 &deg;F</p>
+                      <p class="card-text">Wind: 15.43 MPH</p>
+                      <p class="card-text">Humidity: 78%</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- container for 5 days weather cards
-      <div class="container-fluid m-3 d-flex flex-wrap justify-content-center">
-       
-        <div class="card m-1" style="width: 18rem">
-          <div class="card-body">
-            <h5 class="card-title">Date</h5>
-            <p class="card-text">Icon</p>
-            <p class="card-text">Temp:</p>
-            <p class="card-text">Wind:</p>
-            <p class="card-text">Humidity:</p>
-          </div>
-        </div>
-
-        <div class="card m-1" style="width: 18rem">
-          <div class="card-body">
-            <h5 class="card-title">Date</h5>
-            <p class="card-text">Icon</p>
-            <p class="card-text">Temp:</p>
-            <p class="card-text">Wind:</p>
-            <p class="card-text">Humidity:</p>
-          </div>
-        </div>
-
-        <div class="card m-1" style="width: 18rem">
-          <div class="card-body">
-            <h5 class="card-title">Date</h5>
-            <p class="card-text">Icon</p>
-            <p class="card-text">Temp:</p>
-            <p class="card-text">Wind:</p>
-            <p class="card-text">Humidity:</p>
-          </div>
-        </div>
-
-        <div class="card m-1" style="width: 18rem">
-          <div class="card-body">
-            <h5 class="card-title">Date</h5>
-            <p class="card-text">Icon</p>
-            <p class="card-text">Temp:</p>
-            <p class="card-text">Wind:</p>
-            <p class="card-text">Humidity:</p>
-          </div>
-        </div>
-      </div> -->
-    </main>
+      </main>
+    </div>
     <!--bootstrap js-->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
