@@ -50,6 +50,18 @@ const mockWeatherData = {
 
 //target current weather card container
 const weatherCardsContainer = $("#weather-cards-container");
+//API key
+const keyAPI = "e44640c3292c7704425b7a92efe4de75";
+
+const getWeatherData = async (cityName) => {
+  //build API URL
+  const url_API = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${keyAPI}`;
+
+  //import API data into JS
+  const response = await fetch(url_API);
+  const data = await response.json();
+  console.log(data);
+};
 
 //construct current weather card
 const renderCurrentWeatherCard = (data) => {
@@ -115,3 +127,5 @@ const renderWeatherContainers = (weatherData) => {
 };
 
 renderWeatherContainers(mockWeatherData);
+
+getWeatherData("london");
