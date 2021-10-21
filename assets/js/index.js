@@ -60,7 +60,6 @@ const getWeatherData = async (cityName) => {
   //import API data into JS
   const response = await fetch(url_API);
   const data = await response.json();
-  console.log(data);
 
   //get latitude and longitude data and city name
   const lat = data.coord.lat;
@@ -70,6 +69,60 @@ const getWeatherData = async (cityName) => {
   //build API URL to get weather for current card and forecast weather
   const weather_URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${keyAPI}&units=metric`;
   console.log(weather_URL);
+  //import weather data into JS
+  const weatherResponse = await fetch(weather_URL);
+  const weatherData = await weatherResponse.json();
+  // console.log(weatherData);
+  //get current weather data
+  console.log(weatherData.current.weather.icon);
+  return {
+    current: {
+      name: name,
+      temperature: weatherData.current.temp,
+      wind: weatherData.current.wind_speed,
+      humidity: weatherData.current.humidity,
+      uvi: weatherData.current.uvi,
+      date: "(3/30/2021)",
+      iconCode: "04n",
+    },
+    forecast: [
+      {
+        date: "(3/30/2021)",
+        temperature: 123.45,
+        wind: 111.22,
+        humidity: 33,
+        iconCode: weatherData.current.weather.icon,
+      },
+      {
+        date: "(3/30/2021)",
+        temperature: 123.45,
+        wind: 111.22,
+        humidity: 33,
+        iconCode: "04n",
+      },
+      {
+        date: "(3/30/2021)",
+        temperature: 123.45,
+        wind: 111.22,
+        humidity: 33,
+        iconCode: "04n",
+      },
+      {
+        date: "(3/30/2021)",
+        temperature: 123.45,
+        wind: 111.22,
+        humidity: 33,
+        iconCode: "04n",
+      },
+      {
+        date: "(3/30/2021)",
+        temperature: 123.45,
+        wind: 111.22,
+        humidity: 33,
+        iconCode: "04n",
+      },
+    ],
+  };
 };
 
 //construct current weather card
