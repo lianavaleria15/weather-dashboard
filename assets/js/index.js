@@ -130,6 +130,28 @@ const renderWeatherContainers = (weatherData) => {
   renderForecastWeatherCards(weatherData.forecast);
 };
 
+//render recent cities searched
+const renderRecentCities = () => {
+  //get cities from LS
+  const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
+
+  //target city list container
+  const citiesContainer = $("#city-list");
+
+  //clear city list container
+  citiesContainer.empty();
+
+  //construct each city item
+  const constructAndAppendCity = (city) => {
+    const listElement = `<li class="list-group-item">${city}</li>`;
+
+    citiesContainer.append(listElement);
+  };
+
+  //append city item to container
+  cities.forEach(constructAndAppendCity);
+};
+
 //render last city's searched weather data
 const onLoad = async () => {
   //get data from API
@@ -137,6 +159,21 @@ const onLoad = async () => {
 
   //render weather cards
   renderWeatherContainers(weatherData);
+};
+
+//function to set cities to LS
+const setCitiesToLocalStorage = (cityName) => {
+  //get cities from LS
+  const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
+
+  //if city does not exist in LS
+  if (!cities.includes(cityName)) {
+    //insert city searched to cities list
+    cities.push(cityName);
+
+    //set cities in LS
+    localStorage.setItem("cities", JSON.stringify(cities));
+  }
 };
 
 const handleCitySearch = async (event) => {
@@ -156,17 +193,10 @@ const handleCitySearch = async (event) => {
     //render new search data
     renderWeatherContainers(weatherData);
 
-    //get cities from LS
-    const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
+    setCitiesToLocalStorage(cityName);
 
-    //if city does not exist in LS
-    if (!cities.includes(cityName)) {
-      //insert city searched to cities list
-      cities.push(cityName);
-
-      //set cities in LS
-      localStorage.setItem("cities", JSON.stringify(cities));
-    }
+    //render list of cities searched
+    renderRecentCities();
   }
 };
 
