@@ -67,6 +67,19 @@ const getWeatherData = async (cityName) => {
   };
 };
 
+//set btn class color for UVI index
+const getUVIClassName = (uvi) => {
+  if (uvi >= 0 && uvi < 3) {
+    return "btn-success";
+  } else if (uvi >= 3 && uvi < 6) {
+    return "btn-warning";
+  } else if (uvi >= 6 && uvi < 8) {
+    return "btn-danger";
+  } else {
+    return "btn-dark";
+  }
+};
+
 //construct current weather card
 const renderCurrentWeatherCard = (data) => {
   //use template string to construct current weather card
@@ -79,7 +92,9 @@ const renderCurrentWeatherCard = (data) => {
     <p class="card-text">Wind: ${data.wind} m/h</p>
     <p class="card-text">Humidity: ${data.humidity} %</p>
     <p class="card-text">
-      UV index: <span class="btn btn-primary">${data.uvi}</span>
+      UV index: <span class="btn ${getUVIClassName(data.uvi)}">${
+    data.uvi
+  }</span>
     </p>
   </div>`;
   weatherCardsContainer.append(currentWeatherCard);
