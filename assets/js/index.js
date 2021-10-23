@@ -4,6 +4,35 @@ const weatherCardsContainer = $("#weather-cards-container");
 //API key
 const keyAPI = "e44640c3292c7704425b7a92efe4de75";
 
+//get current data
+const getCurrentData = (name, weatherData) => {
+  return {
+    name: name,
+    temperature: weatherData.current.temp,
+    wind: weatherData.current.wind_speed,
+    humidity: weatherData.current.humidity,
+    uvi: weatherData.current.uvi,
+    //convert with moment js.unix ()
+    date: weatherData.current.dt,
+    iconCode: weatherData.current.weather[0].icon,
+  };
+};
+
+//transform date
+
+//get forecast data
+const getForecastData = (weatherData) => {
+  const callback = (each) => {
+    return {
+      date: each.dt,
+      temperature: each.temp.max,
+      wind: each.wind_speed,
+      humidity: each.humidity,
+      iconCode: each.weather[0].icon,
+    };
+  };
+  return forecastData.daily.map(callback);
+};
 const getWeatherData = async (cityName) => {
   //build API URL to get latitude and longitude data
   const url_API = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${keyAPI}`;
@@ -24,37 +53,20 @@ const getWeatherData = async (cityName) => {
   const weatherResponse = await fetch(weather_URL);
   const weatherData = await weatherResponse.json();
 
-  const fiveDayForecast = weatherData.daily.slice(1, 6);
-  console.log(weatherData);
-  const result = {
-    current: {
-      name: name,
-      temperature: weatherData.current.temp,
-      wind: weatherData.current.wind_speed,
-      humidity: weatherData.current.humidity,
-      uvi: weatherData.current.uvi,
-      //convert with moment js.unix ()
-      date: weatherData.current.dt,
-      iconCode: weatherData.current.weather[0].icon,
-    },
+  //get current data
+  const current = getCurrentData(name, weatherData);
+  const forecast = getForecastData(weatherData);
 
-    forecast: fiveDayForecast.map((forecastItem) => {
-      return {
-        date: forecastItem.dt,
-        temperature: forecastItem.temp.max,
-        wind: forecastItem.wind_speed,
-        humidity: forecastItem.humidity,
-        iconCode: forecastItem.weather[0].icon,
-      };
-    }),
+  const fiveDayForecast = weatherData.daily.slice(1, 6);
+
+  return {
+    current: current,
+    forecast: forecast,
   };
-  console.log(result);
-  return result;
 };
 
 //construct current weather card
 const renderCurrentWeatherCard = (data) => {
-  console.log(data);
   //use template string to construct current weather card
   const currentWeatherCard = `<div class="card-body bg-white border mb-2">
     <h2 class="card-title">
