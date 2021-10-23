@@ -143,22 +143,62 @@ const renderRecentCities = () => {
 
   //construct each city item
   const constructAndAppendCity = (city) => {
-    const listElement = `<li class="list-group-item">${city}</li>`;
+    const listElement = `<li data-city=${city} class="list-group-item">${city}</li>`;
 
     citiesContainer.append(listElement);
   };
+
+  //on city clicked
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    //set target
+    const target = $(event.target);
+
+    //if click is from city list item
+    if (target.is("li")) {
+      //get city name
+      const cityName = target.data("city");
+
+      //render weather info
+      renderWeatherInfo(cityName);
+    }
+  };
+
+  //event listener on city item container
+  citiesContainer.on("click", handleClick);
 
   //append city item to container
   cities.forEach(constructAndAppendCity);
 };
 
+const renderWeatherInfo = async (cityName) => {
+  //get data from API
+  const weatherData = await getWeatherData(cityName);
+
+  //remove last weather search data
+  weatherCardsContainer.empty();
+
+  //render new search data
+  renderWeatherContainers(weatherData);
+};
+
 //render last city's searched weather data
 const onLoad = async () => {
-  //get data from API
-  const weatherData = await getWeatherData("oxford");
+  //render recent cities
+  renderRecentCities();
 
-  //render weather cards
-  renderWeatherContainers(weatherData);
+  //get cities from LS
+  const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
+
+  //if there are recent cities
+  if (cities.length) {
+    //get the info for the most recent city
+    const cityName = cities.pop();
+
+    //render weather cards for recent city
+    renderWeatherInfo(cityName);
+  }
 };
 
 //function to set cities to LS
@@ -184,15 +224,7 @@ const handleCitySearch = async (event) => {
 
   //validation for city name input
   if (cityName) {
-    //get data from API
-    const weatherData = await getWeatherData(cityName);
-
-    //remove last weather search data
-    weatherCardsContainer.empty();
-
-    //render new search data
-    renderWeatherContainers(weatherData);
-
+    renderWeatherInfo(cityName);
     setCitiesToLocalStorage(cityName);
 
     //render list of cities searched
