@@ -19,19 +19,22 @@ const getCurrentData = (name, weatherData) => {
 };
 
 //transform date
-
+const getFormattedDate = (unixTimestamp) => {
+  //return formatted date
+  return moment.unix(unixTimestamp).format("DD/MM/YYYY");
+};
 //get forecast data
 const getForecastData = (weatherData) => {
   const callback = (each) => {
     return {
-      date: each.dt,
+      date: getFormattedDate(each.dt),
       temperature: each.temp.max,
       wind: each.wind_speed,
       humidity: each.humidity,
       iconCode: each.weather[0].icon,
     };
   };
-  return forecastData.daily.map(callback);
+  return weatherData.daily.map(callback);
 };
 const getWeatherData = async (cityName) => {
   //build API URL to get latitude and longitude data
@@ -44,7 +47,7 @@ const getWeatherData = async (cityName) => {
   //get latitude and longitude data and city name
   const lat = data.coord.lat;
   const lon = data.coord.lon;
-  const name = data.name ?? "";
+  const name = data.name;
 
   //build API URL to get weather for current card and forecast weather
   const weather_URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${keyAPI}&units=metric`;
