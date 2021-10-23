@@ -112,7 +112,7 @@ const renderForecastWeatherCards = (forecastData) => {
         </p>
         <p class="card-text">Temp: ${each.temperature} &deg;C</p>
         <p class="card-text">Wind: ${each.wind} m/h</p>
-        <p class="card-text">Humidity: ${each.humidity}</p>
+        <p class="card-text">Humidity: ${each.humidity} %</p>
       </div>
     </div>
   `;
@@ -124,11 +124,11 @@ const renderForecastWeatherCards = (forecastData) => {
     .join("");
 
   //construct forecast weather container
-  const forecastWeatherContainer = `<div>
+  const forecastWeatherContainer = `<div class="border">
     <h3 class="p-3 text-center">5-Day Forecast:</h3>
     <!--container forecast weather cards-->
     <div
-      class=" m-3 d-flex flex-wrap justify-content-around"
+      class="m-3 d-flex flex-wrap justify-content-around"
     ><div
     class="d-flex flex-wrap justify-content-around"
     id="forecast-weather-container"
