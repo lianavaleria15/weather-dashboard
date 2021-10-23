@@ -4,6 +4,12 @@ const weatherCardsContainer = $("#weather-cards-container");
 //API key
 const keyAPI = "e44640c3292c7704425b7a92efe4de75";
 
+//transform date
+const getFormattedDate = (unixTimestamp) => {
+  //return formatted date
+  return moment.unix(unixTimestamp).format("DD/MM/YYYY");
+};
+
 //get current data
 const getCurrentData = (name, weatherData) => {
   return {
@@ -12,17 +18,11 @@ const getCurrentData = (name, weatherData) => {
     wind: weatherData.current.wind_speed,
     humidity: weatherData.current.humidity,
     uvi: weatherData.current.uvi,
-    //convert with moment js.unix ()
-    date: weatherData.current.dt,
+    date: getFormattedDate(weatherData.current.dt),
     iconCode: weatherData.current.weather[0].icon,
   };
 };
 
-//transform date
-const getFormattedDate = (unixTimestamp) => {
-  //return formatted date
-  return moment.unix(unixTimestamp).format("DD/MM/YYYY");
-};
 //get forecast data
 const getForecastData = (weatherData) => {
   const callback = (each) => {
@@ -34,8 +34,9 @@ const getForecastData = (weatherData) => {
       iconCode: each.weather[0].icon,
     };
   };
-  return weatherData.daily.map(callback);
+  return weatherData.daily.slice(1, 6).map(callback);
 };
+
 const getWeatherData = async (cityName) => {
   //build API URL to get latitude and longitude data
   const url_API = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${keyAPI}`;
@@ -60,8 +61,6 @@ const getWeatherData = async (cityName) => {
   const current = getCurrentData(name, weatherData);
   const forecast = getForecastData(weatherData);
 
-  const fiveDayForecast = weatherData.daily.slice(1, 6);
-
   return {
     current: current,
     forecast: forecast,
@@ -77,7 +76,7 @@ const renderCurrentWeatherCard = (data) => {
       <img src="http://openweathermap.org/img/w/${data.iconCode}.png" />
     </h2>
     <p class="card-text">Temp: ${data.temperature} &deg;C</p>
-    <p class="card-text">Wind: ${data.wind} MPH</p>
+    <p class="card-text">Wind: ${data.wind} m/h</p>
     <p class="card-text">Humidity: ${data.humidity} %</p>
     <p class="card-text">
       UV index: <span class="btn btn-primary">${data.uvi}</span>
@@ -97,7 +96,7 @@ const renderForecastWeatherCards = (forecastData) => {
           <img src="http://openweathermap.org/img/w/${each.iconCode}.png" />
         </p>
         <p class="card-text">Temp: ${each.temperature} &deg;C</p>
-        <p class="card-text">Wind: ${each.wind} MPH</p>
+        <p class="card-text">Wind: ${each.wind} m/h</p>
         <p class="card-text">Humidity: ${each.humidity}</p>
       </div>
     </div>
@@ -131,6 +130,7 @@ const renderWeatherContainers = (weatherData) => {
   renderForecastWeatherCards(weatherData.forecast);
 };
 
+//render last city's searched weather data
 const onLoad = async () => {
   //get data from API
   const weatherData = await getWeatherData("oxford");
@@ -138,6 +138,40 @@ const onLoad = async () => {
   //render weather cards
   renderWeatherContainers(weatherData);
 };
+
+const handleCitySearch = async (event) => {
+  event.preventDefault();
+
+  //get city name input from the form
+  const cityName = $("#city-input").val();
+
+  //validation for city name input
+  if (cityName) {
+    //get data from API
+    const weatherData = await getWeatherData(cityName);
+
+    //remove last weather search data
+    weatherCardsContainer.empty();
+
+    //render new search data
+    renderWeatherContainers(weatherData);
+
+    //get cities from LS
+    const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
+
+    //if city does not exist in LS
+    if (!cities.includes(cityName)) {
+      //insert city searched to cities list
+      cities.push(cityName);
+
+      //set cities in LS
+      localStorage.setItem("cities", JSON.stringify(cities));
+    }
+  }
+};
+
+//add event listener on search city form
+$("#search-form").on("submit", handleCitySearch);
 
 //on windows load
 $(document).ready(onLoad);
