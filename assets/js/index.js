@@ -83,7 +83,7 @@ const getUVIClassName = (uvi) => {
 //construct current weather card
 const renderCurrentWeatherCard = (data) => {
   //use template string to construct current weather card
-  const currentWeatherCard = `<div class="card-body bg-white border mb-2">
+  const currentWeatherCard = `<div class="card-body border mb-2">
     <h2 class="card-title">
       ${data.name} ${data.date}
       <img src="http://openweathermap.org/img/w/${data.iconCode}.png" />
@@ -124,7 +124,7 @@ const renderForecastWeatherCards = (forecastData) => {
     .join("");
 
   //construct forecast weather container
-  const forecastWeatherContainer = `<div class="bg-white border">
+  const forecastWeatherContainer = `<div class="border">
     <h3 class="p-3 text-center">5-Day Forecast:</h3>
     <!--container forecast weather cards-->
     <div

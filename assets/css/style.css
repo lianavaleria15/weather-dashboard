@@ -1,3 +1,14 @@
 * {
   box-sizing: border-box;
 }
+
+.main-weather-container {
+  background-image: linear-gradient(
+      to top,
+      rgba(20, 96, 209, 0.644),
+      rgba(187, 186, 190, 0.486)
+    ),
+    url(../images/clouds.jpg);
+  background-position: center;
+  background-size: cover;
+}
